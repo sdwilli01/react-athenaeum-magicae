@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
+import SchoolsDirectory from "./SchoolsDirectory";
 
 export default function Gallery(props) {
     let params = useParams();
     const magicClass = params.galleryId
+    const title = 'Welcome to the ' + magicClass + ' gallery!'
     return (
-        <div>Hello, this will be the {magicClass} Gallery someday</div>
+        <div>
+            <h1>{title}</h1>
+            <SchoolsDirectory magicClass={magicClass} />
+        </div>
     );
 }
