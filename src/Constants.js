@@ -19,4 +19,4 @@ export const MAGIC_SCHOOLS = [
     'transmutation',
 ];
 
-export const MAGIC_LEVELS = 9;
+export const OPEN5E_BASE_LOCATION = 'https://api.open5e.com/';
