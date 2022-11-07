@@ -10,7 +10,8 @@ export default function TomeItem(props) {
     const targetLevel = "/levels/" + level;
     const target = targetSchool + targetClass + targetLevel;
 
-    const title = 'Level ' + level + ' ' + school + ' spells';
+    const levelString = level === 0 ? 'Cantrip' : `Level ${level}`;
+    const title = `${levelString} ${school} Spells`;
 
     return (
         <li>

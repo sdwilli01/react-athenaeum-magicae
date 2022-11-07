@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { OPEN5E_BASE_LOCATION } from "../Constants";
-import TomeItem from "./TomeItem";
 
-export default function TomeDirectory(props) {
+export default function Tome(props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [spellLevels, setSpellLevels] = useState(null);
+    const [spells, setSpells] = useState([]);
 
-    const magicClass = props.magicClass;
-    const school = props.magicSchool;
-    const title = `${magicClass} ${school} Tomes`;
+    let params = useParams();
+    const school = params.schoolId;
+    const magicClass = params.classId;
+    const level = params.levelId;
+    const title = `Level ${level} ${magicClass} ${school} spells`;
 
     const spellsPath = `${OPEN5E_BASE_LOCATION}spells/`;
-    const searchParams = `?school=${school}`;
+    const searchParams = `?school=${school}&level_int=${level}`;
     const spellsLocation = spellsPath + searchParams;
 
+    // Note: the empty deps array [] means
+    // this useEffect will run once
+    // similar to componentDidMount()
     useEffect(() => {
         fetch(spellsLocation)
             .then(res => res.json())
@@ -31,16 +35,10 @@ export default function TomeDirectory(props) {
                         }
 
                         return true;
-                    });
-
-                    let spellTomes = new Set();
-
-                    classSpells.forEach((spell) => {
-                        spellTomes.add(spell.level_int);
-                    });
+                    }); 
 
                     setIsLoaded(true);
-                    setSpellLevels(spellTomes);
+                    setSpells(classSpells);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -50,7 +48,7 @@ export default function TomeDirectory(props) {
                     setError(error);
                 }
             )
-    }, []);
+    }, [])
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -61,16 +59,14 @@ export default function TomeDirectory(props) {
             <div>
                 <h1>{title}</h1>
                 <ul>
-                    {[...spellLevels].sort().map((level) =>
-                        <TomeItem 
-                            key={level.toString()} 
-                            level={level}
-                            magicClass={magicClass}
-                            school={school}
-                        />
-                    )}
+                    {spells.map((spell) => (
+                        <li key={spell.name}>
+                            <Link to={`/spellDetails/${spell.slug}`}>{spell.name}</Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         );
     }
 }
+
