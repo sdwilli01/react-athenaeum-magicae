@@ -8,7 +8,7 @@ export default function Gallery(props) {
     
     return (
         <div>
-            <h1>{title}</h1>
+            <h2>{title}</h2>
             <SchoolsDirectory magicClass={magicClass} />
         </div>
     );

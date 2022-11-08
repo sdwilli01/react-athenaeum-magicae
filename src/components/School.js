@@ -9,7 +9,7 @@ export default function School(props) {
 
     return (
         <div>
-            <h1>{title}</h1>
+            <h2>{title}</h2>
             <TomeDirectory magicSchool={magicSchool} magicClass={magicClass} />
         </div>
     );

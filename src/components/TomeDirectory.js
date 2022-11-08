@@ -59,7 +59,7 @@ export default function TomeDirectory(props) {
     } else {
         return (
             <div>
-                <h1>{title}</h1>
+                <h2>{title}</h2>
                 <ul>
                     {[...spellLevels].sort().map((level) =>
                         <TomeItem 
