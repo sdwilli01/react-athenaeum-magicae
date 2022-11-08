@@ -38,7 +38,7 @@ export default function Spell(props) {
     } else {
         return (
             <div>
-                <h1>{spell.name}</h1>
+                <h2>{spell.name}</h2>
                 <h3>School: {spell.school}</h3>
                 <h3>{spell.level}</h3>
                 <h3>Range: {spell.range}</h3>

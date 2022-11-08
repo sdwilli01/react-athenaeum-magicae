@@ -10,7 +10,7 @@ export default function SchoolsDirectory(props) {
 
     return (
         <div>
-            <h1>{title}</h1>
+            <h2>{title}</h2>
             <ul>{schools}</ul>
         </div>
     );

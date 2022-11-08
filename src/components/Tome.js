@@ -57,7 +57,7 @@ export default function Tome(props) {
     } else {
         return (
             <div>
-                <h1>{title}</h1>
+                <h2>{title}</h2>
                 <ul>
                     {spells.map((spell) => (
                         <li key={spell.name}>
